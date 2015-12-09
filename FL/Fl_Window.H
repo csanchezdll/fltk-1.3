@@ -126,7 +126,7 @@ protected:
     int lw_; ///<  width of shape image
     int lh_; ///<  height of shape image
     Fl_Image* shape_; ///<  shape image
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
     typedef struct CGImage* CGImageRef;
     CGImageRef mask;
 #endif
@@ -147,7 +147,7 @@ public:
    \see void shape(const Fl_Image* img)
    */
   inline void shape(const Fl_Image& b) { shape(&b); }
-#if ! (defined(WIN32) || defined(__APPLE__) || defined(FL_DOXYGEN))
+#if ! (defined(WIN32) || defined(__APPLE_QUARTZ__) || defined(FL_DOXYGEN))
   void combine_mask(void);
 #endif
 private:

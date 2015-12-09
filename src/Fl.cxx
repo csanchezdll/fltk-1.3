@@ -65,14 +65,14 @@ HBRUSH fl_brush_action(int action);
 void fl_cleanup_pens(void);
 void fl_release_dc(HWND,HDC);
 void fl_cleanup_dc_list(void);
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 extern double fl_mac_flush_and_wait(double time_to_wait);
 #endif // WIN32
 
 //
 // Globals...
 //
-#if defined(__APPLE__) || defined(FL_DOXYGEN)
+#if defined(__APPLE_QUARTZ__) || defined(FL_DOXYGEN)
 const char *Fl_Mac_App_Menu::about = "About %@";
 const char *Fl_Mac_App_Menu::print = "Print Front Window";
 const char *Fl_Mac_App_Menu::services = "Services";
@@ -80,7 +80,7 @@ const char *Fl_Mac_App_Menu::hide = "Hide %@";
 const char *Fl_Mac_App_Menu::hide_others = "Hide Others";
 const char *Fl_Mac_App_Menu::show = "Show All";
 const char *Fl_Mac_App_Menu::quit = "Quit %@";
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 #ifndef FL_DOXYGEN
 Fl_Widget	*Fl::belowmouse_,
 		*Fl::pushed_,
@@ -239,7 +239,7 @@ int Fl::event_inside(const Fl_Widget *o) /*const*/ {
 
 // implementation in Fl_win32.cxx
 
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 
 // implementation in Fl_cocoa.mm (was Fl_mac.cxx)
 
@@ -451,7 +451,7 @@ static void run_checks()
   }
 }
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 static char in_idle;
 #endif
 
@@ -538,7 +538,7 @@ double Fl::wait(double time_to_wait) {
 
   return fl_wait(time_to_wait);
 
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 
   run_checks();
   return fl_mac_flush_and_wait(time_to_wait);
@@ -676,7 +676,7 @@ int Fl::check() {
   \endcode
 */
 int Fl::ready() {
-#if ! defined( WIN32 )  &&  ! defined(__APPLE__)
+#if ! defined( WIN32 )  &&  ! defined(__APPLE_QUARTZ__)
   if (first_timeout) {
     elapse_timeouts();
     if (first_timeout->time <= 0) return 1;
@@ -965,7 +965,7 @@ void Fl::focus(Fl_Widget *o) {
       if (!w1) w1 = o->window();
       while (w1) { win=w1; w1=win->window(); }
       if (win) {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 	if (fl_xfocus != win) {
 	  Fl_X *x = Fl_X::i(win);
 	  if (x) x->set_key_window();
@@ -1101,7 +1101,7 @@ void fl_fix_focus() {
   }
 }
 
-#if !(defined(WIN32) || defined(__APPLE__))
+#if !(defined(WIN32) || defined(__APPLE_QUARTZ__))
 extern Fl_Widget *fl_selection_requestor; // from Fl_x.cxx
 #endif
 
@@ -1119,7 +1119,7 @@ void fl_throw_focus(Fl_Widget *o) {
 #endif // DEBUG
 
   if (o->contains(Fl::pushed())) Fl::pushed_ = 0;
-#if !(defined(WIN32) || defined(__APPLE__))
+#if !(defined(WIN32) || defined(__APPLE_QUARTZ__))
   if (o->contains(fl_selection_requestor)) fl_selection_requestor = 0;
 #endif
   if (o->contains(Fl::belowmouse())) Fl::belowmouse_ = 0;
@@ -1342,7 +1342,7 @@ int Fl::handle_(int e, Fl_Window* window)
     if (grab()) wi = grab();
     { int ret;
       Fl_Widget* pbm = belowmouse();
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
       if (fl_mac_os_version < 100500) {
         // before 10.5, mouse moved events aren't sent to borderless windows such as tooltips
 	Fl_Window *tooltip = Fl_Tooltip::current_window();
@@ -1544,7 +1544,7 @@ void Fl_Window::hide() {
   Fl_X** pp = &Fl_X::first;
   for (; *pp != ip; pp = &(*pp)->next) if (!*pp) return;
   *pp = ip->next;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   // MacOS X manages a single pointer per application. Make sure that hiding
   // a toplevel window will not leave us with some random pointer shape, or
   // worst case, an invisible pointer
@@ -1661,7 +1661,7 @@ int Fl_Window::handle(int ev)
 	i->map();
 #else
 # error unsupported platform
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
       }
       break;
     case FL_HIDE:
@@ -1890,7 +1890,7 @@ void Fl_Window::flush() {
 
 #ifdef WIN32
 #  include "Fl_win32.cxx"
-//#elif defined(__APPLE__)
+//#elif defined(__APPLE_QUARTZ__)
 #endif
 
 

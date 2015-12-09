@@ -706,7 +706,7 @@ showing an example of how to do this:
     case FL_PUSH:
     {
 	int btn = Fl::event_button();
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 	int ev_state = Fl::event_state();
 #endif
 	//
@@ -714,7 +714,7 @@ showing an example of how to do this:
 	//     1 - right click, as normally used on Windows and Linux
 	//     2 - Ctrl + left click, as sometimes used on Mac
 	//
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 	// On apple, check right click, and ctrl+left click
 	if ((btn == FL_RIGHT_MOUSE) || (ev_state == (FL_CTRL | FL_BUTTON1)))
 #else

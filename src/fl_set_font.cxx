@@ -32,7 +32,7 @@ static int table_size;
   the string is not copied, so the string must be in static memory.
 */    
 void Fl::set_font(Fl_Font fnum, const char* name) {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   if (!fl_fonts) fl_fonts = Fl_X::calc_fl_fonts();
 #endif
   while (fnum >= table_size) {
@@ -50,16 +50,16 @@ void Fl::set_font(Fl_Font fnum, const char* name) {
     for (; i < table_size; i++) {
       fl_fonts[i].fontname[0] = 0;
       fl_fonts[i].name = 0;
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
       fl_fonts[i].xlist = 0;
       fl_fonts[i].n = 0;
-#endif // !WIN32 && !__APPLE__
+#endif // !WIN32 && !__APPLE_QUARTZ__
     }
   }
   Fl_Fontdesc* s = fl_fonts+fnum;
   if (s->name) {
     if (!strcmp(s->name, name)) {s->name = name; return;}
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
     if (s->xlist && s->n >= 0) XFreeFontNames(s->xlist);
 #endif
     for (Fl_Font_Descriptor* f = s->first; f;) {
@@ -69,7 +69,7 @@ void Fl::set_font(Fl_Font fnum, const char* name) {
   }
   s->name = name;
   s->fontname[0] = 0;
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
   s->xlist = 0;
 #endif
   s->first = 0;
@@ -85,7 +85,7 @@ void Fl::set_font(Fl_Font fnum, Fl_Font from) {
     of this face.
 */
 const char* Fl::get_font(Fl_Font fnum) {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   if (!fl_fonts) fl_fonts = Fl_X::calc_fl_fonts();
 #endif
   return fl_fonts[fnum].name;

@@ -40,7 +40,7 @@ extern "C" {
   int XUtf8Tolower(int ucs);
   unsigned short XUtf8IsNonSpacing(unsigned int ucs);
 };
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 # include <stdio.h>
 # include <time.h>
 //# include <unix.h>

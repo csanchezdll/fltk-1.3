@@ -407,7 +407,7 @@ void exit_cb(Fl_Widget *,void *) {
   exit(0);
 }
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  include <FL/x.H>
 
 void
@@ -444,7 +444,7 @@ apple_open_cb(const char *c) {
   undo_clear();
   if (oldfilename) free((void *)oldfilename);
 }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 void open_cb(Fl_Widget *, void *v) {
   if (!v && modflag) {
@@ -1249,11 +1249,11 @@ void update_history(const char *flname) {
   fl_filename_absolute(absolute, sizeof(absolute), flname);
 
   for (i = 0; i < max_files; i ++)
-#if defined(WIN32) || defined(__APPLE__)
+#if defined(WIN32) || defined(__APPLE_QUARTZ__)
     if (!strcasecmp(absolute, absolute_history[i])) break;
 #else
     if (!strcmp(absolute, absolute_history[i])) break;
-#endif // WIN32 || __APPLE__
+#endif // WIN32 || __APPLE_QUARTZ__
 
   if (i == 0) return;
 
@@ -1757,9 +1757,9 @@ int main(int argc,char **argv) {
 
   if (c) set_filename(c);
   if (!batch_mode) {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
     fl_open_callback(apple_open_cb);
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
     Fl::visual((Fl_Mode)(FL_DOUBLE|FL_INDEX));
     Fl_File_Icon::load_system_icons();
     main_window->callback(exit_cb);

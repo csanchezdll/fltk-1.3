@@ -16,7 +16,7 @@
  *     http://www.fltk.org/str.php
  */
  
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  ifdef __BIG_ENDIAN__
 #    define WORDS_BIGENDIAN 1
 #  else

@@ -52,7 +52,7 @@ typedef void (*Fl_Draw_Image_Cb)(void* data,int x,int y,int w,uchar* buf);
 #ifdef WIN32
 typedef int COORD_T;
 #  define XPOINT XPoint
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 typedef float COORD_T;
 typedef struct { float x; float y; } QPoint;
 #  define XPOINT QPoint
@@ -162,7 +162,7 @@ protected:
   friend void fl_line(int x, int y, int x1, int y1);
   friend void fl_line(int x, int y, int x1, int y1, int x2, int y2);
   friend void fl_draw(const char *str, int n, int x, int y);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   friend void fl_draw(const char *str, int n, float x, float y);
 #endif
   friend void fl_draw(int angle, const char *str, int n, int x, int y);
@@ -247,7 +247,7 @@ protected:
   virtual void line(int x, int y, int x1, int y1, int x2, int y2);
   /** \brief see fl_draw(const char *str, int n, int x, int y). */
   virtual void draw(const char *str, int n, int x, int y) {}
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   virtual void draw(const char *str, int n, float x, float y) { draw(str, n, (int)(x+0.5), (int)(y+0.5));}
 #endif
   /** \brief see fl_draw(int angle, const char *str, int n, int x, int y). */
@@ -410,7 +410,7 @@ public:
   virtual ~Fl_Graphics_Driver() { if (p) free(p); }
 };
 
-#if defined(__APPLE__) || defined(FL_DOXYGEN)
+#if defined(__APPLE_QUARTZ__) || defined(FL_DOXYGEN)
 /**
  \brief The Mac OS X-specific graphics class.
  *
@@ -423,7 +423,7 @@ public:
   void color(Fl_Color c);
   void color(uchar r, uchar g, uchar b);
   void draw(const char* str, int n, int x, int y);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   void draw(const char *str, int n, float x, float y);
 #endif
   void draw(int angle, const char *str, int n, int x, int y);
@@ -496,7 +496,7 @@ public:
   int draw_scaled(Fl_Image *img, int XP, int YP, int WP, int HP);
 };
 #endif
-#if !(defined(__APPLE__) || defined(WIN32))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32))
 /**
  \brief The Xlib-specific graphics class.
  *
@@ -576,7 +576,7 @@ public:
  */
 class FL_EXPORT Fl_Display_Device : public Fl_Surface_Device {
   static Fl_Display_Device *_display; // the platform display device
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   friend class Fl_X;
   friend class Fl_Graphics_Driver;
   static bool high_res_window_; //< true when drawing to a window of a retina display (Mac OS X only)

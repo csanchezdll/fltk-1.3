@@ -24,7 +24,7 @@
 
 #ifdef WIN32
 #  include "fl_set_fonts_win32.cxx"
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 #  include "fl_set_fonts_mac.cxx"
 #elif USE_XFT
 #  include "fl_set_fonts_xft.cxx"

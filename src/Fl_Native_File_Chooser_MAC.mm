@@ -21,7 +21,7 @@
 //        Possibly 'preset_file' could be used to select the filename.
 //
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 
 #include "Fl_Native_File_Chooser_common.cxx"		// strnew/strfree/strapp/chrcat
 #include <libgen.h>		// dirname(3)
@@ -656,7 +656,7 @@ int Fl_Native_File_Chooser::post() {
   return (retval == 1 ? 0 : 1);
 }
 
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 //
 // End of "$Id$".

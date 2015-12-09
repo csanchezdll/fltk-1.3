@@ -29,7 +29,7 @@
 
 #  ifdef WIN32
 void fl_save_dc(HWND, HDC);
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 extern void gl_texture_reset();
 #endif
 

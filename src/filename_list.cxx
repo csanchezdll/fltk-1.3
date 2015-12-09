@@ -22,7 +22,7 @@
 #include <FL/fl_utf8.h>
 #include "flstring.h"
 #include <stdlib.h>
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #include <FL/x.H>
 #endif
 
@@ -87,7 +87,7 @@ int fl_filename_list(const char *d, dirent ***list,
 
   // Assume that locale encoding is no less dense than UTF-8
   dirlen = strlen(d);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   dirloc = (char *)d;
 #else
   dirloc = (char *)malloc(dirlen + 1);
@@ -97,7 +97,7 @@ int fl_filename_list(const char *d, dirent ***list,
 #ifndef HAVE_SCANDIR
   // This version is when we define our own scandir
   int n = fl_scandir(dirloc, list, 0, sort);
-#elif defined(HAVE_SCANDIR_POSIX) && !defined(__APPLE__)
+#elif defined(HAVE_SCANDIR_POSIX) && !defined(__APPLE_QUARTZ__)
   // POSIX (2008) defines the comparison function like this:
   int n = scandir(dirloc, list, 0, (int(*)(const dirent **, const dirent **))sort);
 #elif defined(__osf__)
@@ -108,7 +108,7 @@ int fl_filename_list(const char *d, dirent ***list,
   int n = scandir(dirloc, list, 0, (int(*)(void*, void*))sort);
 #elif defined(__sgi)
   int n = scandir(dirloc, list, 0, sort);
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 # if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_8
   int n = scandir(dirloc, list, 0, (int(*)(const struct dirent**,const struct dirent**))sort);
 # else
@@ -121,7 +121,7 @@ int fl_filename_list(const char *d, dirent ***list,
   int n = scandir(dirloc, list, 0, (int(*)(const void*,const void*))sort);
 #endif
 
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
   free(dirloc);
 #endif
 
@@ -140,7 +140,7 @@ int fl_filename_list(const char *d, dirent ***list,
     int newlen;
     dirent *de = (*list)[i];
     int len = strlen(de->d_name);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
     newlen = len;
 #else
     newlen = fl_utf8from_mb(NULL, 0, de->d_name, len);
@@ -149,7 +149,7 @@ int fl_filename_list(const char *d, dirent ***list,
 
     // Conversion to UTF-8
     memcpy(newde, de, de->d_name - (char*)de);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
     strcpy(newde->d_name, de->d_name);
 #else
     fl_utf8from_mb(newde->d_name, newlen + 1, de->d_name, len);

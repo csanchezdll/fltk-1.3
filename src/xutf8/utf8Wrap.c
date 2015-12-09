@@ -17,7 +17,7 @@
 /*
  * X11 UTF-8 text drawing functions.
  */
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 
 #include "../Xutf8.h"
 #include <X11/Xlib.h>

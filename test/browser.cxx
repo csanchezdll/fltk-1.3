@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
       fname = "../test/browser.cxx";
       done = browser->load(fname);
     }
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
     if ( i == argc ) 
     {
       char buf[2048];

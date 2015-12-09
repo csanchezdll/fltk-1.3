@@ -27,7 +27,7 @@
 #    define chdir _chdir
 #    define putenv _putenv
 #  endif // !__WATCOMC__
-#elif defined __APPLE__
+#elif defined __APPLE_QUARTZ__
 #include <ApplicationServices/ApplicationServices.h>
 #include <unistd.h> // for chdir()
 #include <stdio.h>
@@ -275,7 +275,7 @@ void dobut(Fl_Widget *, long arg)
     delete[] command;
     delete[] copy_of_icommand;
     
-#elif defined __APPLE__
+#elif defined __APPLE_QUARTZ__
     char *cmd = strdup(menus[men].icommand[bn]);
     char *arg = strchr(cmd, ' ');
     

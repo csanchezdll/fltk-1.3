@@ -765,7 +765,7 @@ Fl_Menu_Item menuitems[] = {
     { "&Save File",       FL_COMMAND + 's', (Fl_Callback *)save_cb },
     { "Save File &As...", FL_COMMAND + FL_SHIFT + 's', (Fl_Callback *)saveas_cb, 0, FL_MENU_DIVIDER },
     { "New &View",        FL_ALT
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
       + FL_COMMAND
 #endif
       + 'v', (Fl_Callback *)view_cb, 0 },
@@ -831,7 +831,7 @@ int main(int argc, char **argv) {
   Fl_Window* window = new_view();
 
   window->show(1, argv);
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
   if (argc > 1) load_file(argv[1], -1);
 #endif
 

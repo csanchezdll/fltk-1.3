@@ -18,7 +18,7 @@
 
 #ifdef WIN32
 #  include "Fl_get_key_win32.cxx"
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 #  include "Fl_get_key_mac.cxx"
 #else
 

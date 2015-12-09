@@ -92,7 +92,7 @@ static void set_selection_color(uchar r, uchar g, uchar b) {
   Fl::set_color(FL_SELECTION_COLOR,r,g,b);
 }
 
-#if defined(WIN32) || defined(__APPLE__)
+#if defined(WIN32) || defined(__APPLE_QUARTZ__)
 
 #  include <stdio.h>
 // simulation of XParseColor:
@@ -129,7 +129,7 @@ int fl_parse_color(const char* p, uchar& r, uchar& g, uchar& b) {
     return 1;
   } else return 0;
 }
-#endif // WIN32 || __APPLE__
+#endif // WIN32 || __APPLE_QUARTZ__
 
 
 /** \fn Fl::get_system_colors()
@@ -169,7 +169,7 @@ void Fl::get_system_colors() {
   getsyscolor(COLOR_HIGHLIGHT,	0,     set_selection_color);
 }
 
-#elif defined(__APPLE__)			// --- APPLE ---
+#elif defined(__APPLE_QUARTZ__)			// --- APPLE ---
 
 // MacOS X currently supports two color schemes - Blue and Graphite.
 // Since we aren't emulating the Aqua interface (even if Apple would
@@ -292,13 +292,13 @@ static Fl_Pixmap	tile(tile_xpm);
 int Fl::scheme(const char *s) {
   if (!s) {
     if ((s = getenv("FLTK_SCHEME")) == NULL) {
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
       const char* key = 0;
       if (Fl::first_window()) key = Fl::first_window()->xclass();
       if (!key) key = "fltk";
       fl_open_display();
       s = XGetDefault(fl_display, key, "scheme");
-#endif // !WIN32 && !__APPLE__
+#endif // !WIN32 && !__APPLE_QUARTZ__
     }
   }
 

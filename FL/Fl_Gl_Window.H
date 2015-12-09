@@ -238,7 +238,7 @@ public:
    Fl::event_y() to the pixel units used by the OpenGL source code.
    \version 1.3.4
    */
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   int pixels_per_unit();
 #else
   int pixels_per_unit() { return 1; }

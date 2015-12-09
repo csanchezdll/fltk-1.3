@@ -24,7 +24,7 @@ const char *Fl_Device::class_id = "Fl_Device";
 const char *Fl_Surface_Device::class_id = "Fl_Surface_Device";
 const char *Fl_Display_Device::class_id = "Fl_Display_Device";
 const char *Fl_Graphics_Driver::class_id = "Fl_Graphics_Driver";
-#if defined(__APPLE__) || defined(FL_DOXYGEN)
+#if defined(__APPLE_QUARTZ__) || defined(FL_DOXYGEN)
 const char *Fl_Quartz_Graphics_Driver::class_id = "Fl_Quartz_Graphics_Driver";
 #  ifndef FL_DOXYGEN
    bool Fl_Display_Device::high_res_window_ = false;
@@ -34,7 +34,7 @@ const char *Fl_Quartz_Graphics_Driver::class_id = "Fl_Quartz_Graphics_Driver";
 const char *Fl_GDI_Graphics_Driver::class_id = "Fl_GDI_Graphics_Driver";
 const char *Fl_GDI_Printer_Graphics_Driver::class_id = "Fl_GDI_Printer_Graphics_Driver";
 #endif
-#if !(defined(__APPLE__) || defined(WIN32))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32))
 const char *Fl_Xlib_Graphics_Driver::class_id = "Fl_Xlib_Graphics_Driver";
 #endif
 
@@ -82,7 +82,7 @@ this->set_current();
 /** Returns the platform display device. */
 Fl_Display_Device *Fl_Display_Device::display_device() {
   static Fl_Display_Device *display = new Fl_Display_Device(new
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
                                                                   Fl_Quartz_Graphics_Driver
 #elif defined(WIN32)
                                                                   Fl_GDI_Graphics_Driver

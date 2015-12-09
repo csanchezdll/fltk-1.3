@@ -23,7 +23,7 @@
 
 #include <FL/x.H>
 #include <FL/fl_draw.H>
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #include <config.h>
 #endif
 

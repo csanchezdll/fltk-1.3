@@ -106,18 +106,18 @@ int Fl_Pixmap::prepare(int XP, int YP, int WP, int HP, int &cx, int &cy,
     return 1;
   }
   if (!id_) {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
     id_ = Fl_Quartz_Graphics_Driver::create_offscreen_with_alpha(w(), h());
 #else
     id_ = fl_create_offscreen(w(), h());
 #endif
     fl_begin_offscreen((Fl_Offscreen)id_);
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
     uchar *bitmap = 0;
     fl_mask_bitmap = &bitmap;
 #endif
     fl_draw_pixmap(data(), 0, 0, FL_BLACK);
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
 #if defined(WIN32)
     extern UINT win_pixmap_bg_color; // computed by fl_draw_pixmap()
     this->pixmap_bg_color = win_pixmap_bg_color;
@@ -134,7 +134,7 @@ int Fl_Pixmap::prepare(int XP, int YP, int WP, int HP, int &cx, int &cy,
 }
 
 //------------------------------------------------------------------------------
-#ifdef __APPLE__					// Apple, Mac OS X
+#ifdef __APPLE_QUARTZ__					// Apple, Mac OS X
 //------------------------------------------------------------------------------
 
 void Fl_Quartz_Graphics_Driver::draw(Fl_Pixmap *pxm, int XP, int YP, int WP, int HP, int cx, int cy) {

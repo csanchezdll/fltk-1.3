@@ -506,7 +506,7 @@ tree->redraw();}
       Fl_Choice collapseicons_chooser {
         label {Collapse icons}
         callback {static const char *L_open_xpm[] = {
-\#ifdef __APPLE__
+\#ifdef __APPLE_QUARTZ__
   "11 11 3 1",
   ".	c \#fefefe",
   "\#	c \#444444",
@@ -542,7 +542,7 @@ tree->redraw();}
 static Fl_Pixmap L_openpixmap(L_open_xpm);
 
 static const char *L_close_xpm[] = {
-\#ifdef __APPLE__
+\#ifdef __APPLE_QUARTZ__
   "11 11 3 1",
   ".	c \#fefefe",
   "\#	c \#444444",

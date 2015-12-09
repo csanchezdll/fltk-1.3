@@ -14,7 +14,7 @@
  *     http://www.fltk.org/str.php
  */
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 
 #include <config.h>
 #include "../Xutf8.h"

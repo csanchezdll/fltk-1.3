@@ -37,7 +37,7 @@ extern void fl_fix_focus(); // in Fl.cxx
 extern HWND fl_capture;
 #endif
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 extern void *fl_capture;
 #endif
 
@@ -56,7 +56,7 @@ void Fl::grab(Fl_Window* win) {
 #ifdef WIN32
       SetActiveWindow(fl_capture = fl_xid(first_window()));
       SetCapture(fl_capture);
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
       fl_capture = Fl_X::i(first_window())->xid;
       Fl_X::i(first_window())->set_key_window();
 #else
@@ -85,7 +85,7 @@ void Fl::grab(Fl_Window* win) {
 #ifdef WIN32
       fl_capture = 0;
       ReleaseCapture();
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
       fl_capture = 0;
 #else
       // We must keep the grab in the non-EWMH fullscreen case

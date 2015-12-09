@@ -35,7 +35,7 @@
 
 #ifdef WIN32
 #  include "sudokurc.h"
-#elif !defined(__APPLE__)
+#elif !defined(__APPLE_QUARTZ__)
 #  include "pixmaps/sudoku.xbm"
 #endif // WIN32
 
@@ -50,9 +50,9 @@
 #  define ALSA_PCM_NEW_HW_PARAMS_API
 #  include <alsa/asoundlib.h>
 #endif // HAVE_ALSA_ASOUNDLIB_H
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  include <CoreAudio/AudioHardware.h>
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 #ifdef WIN32
 #  include <mmsystem.h>
 #endif // WIN32
@@ -65,11 +65,11 @@
 #define GROUP_SIZE	160
 #define CELL_SIZE	50
 #define CELL_OFFSET	5
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  define MENU_OFFSET	0
 #else
 #  define MENU_OFFSET	25
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 // Sound class for Sudoku...
 //
@@ -88,7 +88,7 @@
 // the CoreAudio implementation you see here!
 class SudokuSound {
   // Private, OS-specific data...
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   AudioDeviceID device;
 #ifndef MAC_OS_X_VERSION_10_5
 #define MAC_OS_X_VERSION_10_5 1050
@@ -118,7 +118,7 @@ class SudokuSound {
 #  ifdef HAVE_ALSA_ASOUNDLIB_H
   snd_pcm_t *handle;
 #  endif // HAVE_ALSA_ASOUNDLIB_H
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
   // Common data...
   static int frequencies[9];
@@ -219,7 +219,7 @@ int SudokuSound::sample_size = 0;
 SudokuSound::SudokuSound() {
   sample_size = 0;
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   remaining = 0;
 
   UInt32 size = sizeof(device);
@@ -315,7 +315,7 @@ SudokuSound::SudokuSound() {
     }
   }
 #  endif // HAVE_ALSA_ASOUNDLIB_H
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
   if (sample_size) {
     // Make each of the notes using a combination of sine and sawtooth waves
@@ -347,7 +347,7 @@ SudokuSound::SudokuSound() {
 
 // Cleanup the SudokuSound class
 SudokuSound::~SudokuSound() {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   if (sample_size) {
 #  if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
     AudioDeviceStop(device, audio_proc_id);
@@ -376,7 +376,7 @@ SudokuSound::~SudokuSound() {
     snd_pcm_close(handle);
   }
 #  endif // HAVE_ALSA_ASOUNDLIB_H
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
   if (sample_size) {
     for (int i = 0; i < 9; i ++) {
@@ -386,7 +386,7 @@ SudokuSound::~SudokuSound() {
 }
 
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 // Callback function for writing audio data...
 OSStatus
 SudokuSound::audio_cb(AudioDeviceID device,
@@ -416,7 +416,7 @@ SudokuSound::audio_cb(AudioDeviceID device,
 
   return noErr;
 }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 #define NOTE_DURATION 50
 
@@ -424,7 +424,7 @@ SudokuSound::audio_cb(AudioDeviceID device,
 void SudokuSound::play(char note) {
   Fl::check();
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   // Point to the next note...
   data      = sample_data[note - 'A'];
   remaining = sample_size * 2;
@@ -480,7 +480,7 @@ void SudokuSound::play(char note) {
   XChangeKeyboardControl(fl_display,
                          KBBellPercent | KBBellPitch | KBBellDuration,
 			 &control);
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 }
 
 
@@ -707,7 +707,7 @@ Sudoku::Sudoku()
   // Set icon for window (MacOS uses app bundle for icon...)
 #ifdef WIN32
   icon((char *)LoadIcon(fl_display, MAKEINTRESOURCE(IDI_ICON)));
-#elif !defined(__APPLE__)
+#elif !defined(__APPLE_QUARTZ__)
   fl_open_display();
   icon((char *)XCreateBitmapFromData(fl_display, DefaultRootWindow(fl_display),
                                      (char *)sudoku_bits, sudoku_width,

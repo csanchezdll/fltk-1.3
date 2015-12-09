@@ -53,7 +53,7 @@ private:
   int width;
   int height;
   Fl_Paged_Device *helper;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   CFMutableDataRef pdfdata;
   CGContextRef oldgc;
   CGContextRef gc;
@@ -83,7 +83,7 @@ public:
   int h() { return height; }
 };
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 
 /* Mac class to reimplement Fl_Paged_Device::printable_rect() */
 class FL_EXPORT Fl_Quartz_Surface_ : public Fl_System_Printer {

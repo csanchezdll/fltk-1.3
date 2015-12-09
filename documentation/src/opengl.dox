@@ -473,7 +473,7 @@ For the MSWindows platform, a Visual Studio static library (glew32.lib) can be d
 \li Put this in all OpenGL-using source files (instead of \#include <FL/gl.h>, 
 and before \#include <FL/glut.h> if you use GLUT):
 \code
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 #  include <OpenGL/gl3.h> // defines OpenGL 3.0+ functions
 #else
 #  if defined(WIN32)
@@ -487,7 +487,7 @@ or glutInitDisplayMode().
 \li Put this in the <tt>handle(int event)</tt> member function of the first to be created 
 among your Fl_Gl_Window-derived classes:
 \code
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
     static int first = 1;
     if (first && event == FL_SHOW && shown()) {
       first = 0;
@@ -498,7 +498,7 @@ among your Fl_Gl_Window-derived classes:
 \endcode
 \li Alternatively, if you use GLUT, put
 \code
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
   glewInit(); // defines pters to functions of OpenGL V 1.2 and above
 #endif
 \endcode
@@ -507,7 +507,7 @@ after the first glutCreateWindow() call.
 If GLEW is installed on the Mac OS development platform, it is possible 
 to use the same code for all platforms, with one exception: put
 \code
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 glewExperimental = GL_TRUE;
 #endif
 \endcode

@@ -163,7 +163,7 @@ void border_cb(Fl_Widget *o, void *p) {
   Fl_Window *w = (Fl_Window *)p;
   int d = ((Fl_Button *)o)->value();
   w->border(d);
-#if defined(WIN32) || defined(__APPLE__)
+#if defined(WIN32) || defined(__APPLE_QUARTZ__)
   int wx = w->x(), wy = w->y();
   w->hide(); w->show();
   w->position(wx, wy);

@@ -35,7 +35,7 @@
 // lookup tables below will convert all common character codes and replace
 // unknown characters with an upsidedown question mark.
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 
 const char *fl_mac_roman_to_local(const char *t, int)
 {

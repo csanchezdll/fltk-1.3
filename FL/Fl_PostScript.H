@@ -199,7 +199,7 @@ class Clip {
   void draw_image_mono(Fl_Draw_Image_Cb call, void* data, int x,int y, int w, int h, int delta=1);
       
   void draw(const char* s, int nBytes, int x, int y) {transformed_draw(s,nBytes,x,y); };
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   void draw(const char* s, int nBytes, float x, float y) {transformed_draw(s,nBytes,x,y); };
 #endif
   void draw(int angle, const char *str, int n, int x, int y);
@@ -224,7 +224,7 @@ class Clip {
  two variants of which are usable and allow to specify what page format and layout are desired.
  */
 class FL_EXPORT Fl_PostScript_File_Device : public Fl_Paged_Device {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   CGContextRef gc;
 #endif
 protected:
@@ -250,7 +250,7 @@ public:
   void untranslate(void);
   int end_page (void);    
   void end_job(void);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   void set_current() { fl_gc = gc; Fl_Paged_Device::set_current(); }
 #endif
   

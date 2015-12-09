@@ -29,7 +29,7 @@
 // One Compile to copy them all and in the bundle bind them,
 // in the Land of MacOS X where the Drop-Shadows lie."
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 
 #define CONSOLIDATE_MOTION 0
 extern "C" {
@@ -4556,7 +4556,7 @@ int Fl_X::calc_mac_os_version() {
   return M*10000 + m*100 + b;
 }
 
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 //
 // End of "$Id$".

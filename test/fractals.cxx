@@ -70,7 +70,7 @@ int main(int, char**) {
 #if defined(WIN32) || defined(__EMX__)
 #  define drand48() (((float) rand())/((float) RAND_MAX))
 #  define srand48(x) (srand((x)))
-#elif defined __APPLE__
+#elif defined __APPLE_QUARTZ__
 #  define drand48() (((float) rand())/((float) RAND_MAX))
 #  define srand48(x) (srand((x)))
 #endif

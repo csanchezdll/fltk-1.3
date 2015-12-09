@@ -6,7 +6,7 @@
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Text_Buffer.H>
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 #  include <OpenGL/gl3.h> // defines OpenGL 3.0+ functions
 #else
 #  if defined(WIN32)
@@ -127,7 +127,7 @@ public:
     if (first && event == FL_SHOW && shown()) {
       first = 0;
       make_current();
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
       GLenum err = glewInit(); // defines pters to functions of OpenGL V 1.2 and above
       if (err) Fl::warning("glewInit() failed returning %u", err);
       else add_output("Using GLEW %s\n", glewGetString(GLEW_VERSION));

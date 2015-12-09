@@ -421,7 +421,7 @@ int make_font_chooser(void)
   //	font_count = Fl::set_fonts("*");
 #ifdef WIN32
   font_count = Fl::set_fonts("*");
-#elif __APPLE__
+#elif __APPLE_QUARTZ__
   font_count = Fl::set_fonts("*");
 #else
   // Load the systems available fonts - ask for everything that claims to be 
@@ -582,7 +582,7 @@ int main(int argc, char** argv)
   Fl::set_font(extra_font,
 #ifdef WIN32
                " Arial Unicode MS"
-#elif __APPLE__
+#elif __APPLE_QUARTZ__
                "Monaco"
 #else
                "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1"

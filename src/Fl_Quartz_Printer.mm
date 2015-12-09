@@ -16,7 +16,7 @@
 //     http://www.fltk.org/str.php
 //
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #include <FL/Fl_Printer.H>
 
 #include <FL/Fl.H>
@@ -336,7 +336,7 @@ void Fl_System_Printer::print_window_part(Fl_Window *win, int x, int y, int w, i
   CFRelease(img);
 }
 
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 //
 // End of "$Id$".

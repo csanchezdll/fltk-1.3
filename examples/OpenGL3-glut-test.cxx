@@ -1,5 +1,5 @@
 #include <stdio.h>
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 #  define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED 1
 #  include <OpenGL/gl3.h> // defines OpenGL 3.0+ functions
 #else
@@ -91,7 +91,7 @@ void initShaders(void)
   v = glCreateShader(GL_VERTEX_SHADER);
   f = glCreateShader(GL_FRAGMENT_SHADER);
   
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #define SHADING_LANG_VERS "140"
 #else
 #define SHADING_LANG_VERS "130"
@@ -179,7 +179,7 @@ int main (int argc, char* argv[])
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | FL_OPENGL3);
   glutInitWindowSize(400,400);
   glutCreateWindow("Triangle Test");
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
   GLenum err = glewInit(); // defines pters to functions of OpenGL V 1.2 and above
   if (err) Fl::error("glewInit() failed returning %u", err);
   fprintf(stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));

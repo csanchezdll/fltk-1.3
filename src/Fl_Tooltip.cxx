@@ -75,7 +75,7 @@ Fl_Widget* Fl_Tooltip::widget_ = 0;
 static Fl_TooltipBox *window = 0;
 static int Y,H;
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 // returns the unique tooltip window
 Fl_Window *Fl_Tooltip::current_window(void)
 {
@@ -156,7 +156,7 @@ static void tooltip_timeout(void*) {
       if (window) window->hide();
     } else {
       int condition = 1;
-#if !(defined(__APPLE__) || defined(WIN32))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32))
       condition = (Fl::grab() == NULL);
 #endif
       if ( condition ) {

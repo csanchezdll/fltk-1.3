@@ -43,9 +43,9 @@
 #  define ALSA_PCM_NEW_HW_PARAMS_API
 #  include <alsa/asoundlib.h>
 #endif // HAVE_ALSA_ASOUNDLIB_H
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  include <CoreAudio/AudioHardware.h>
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 #ifdef WIN32
 #  include <mmsystem.h>
 #endif // WIN32
@@ -137,7 +137,7 @@ Fl_Tiled_Image screen_tile(&screen_bitmap);
 // the CoreAudio implementation you see here!
 class BlockSound {
   // Private, OS-specific data...
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   AudioDeviceID device;
 #ifndef MAC_OS_X_VERSION_10_5
 #define MAC_OS_X_VERSION_10_5 1050
@@ -167,7 +167,7 @@ class BlockSound {
 #  ifdef HAVE_ALSA_ASOUNDLIB_H
   snd_pcm_t *handle;
 #  endif // HAVE_ALSA_ASOUNDLIB_H
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
   public:
 
@@ -190,7 +190,7 @@ int BlockSound::sample_size = 0;
 BlockSound::BlockSound() {
   sample_size = 0;
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   remaining = 0;
 
   UInt32 size = sizeof(device);
@@ -283,7 +283,7 @@ BlockSound::BlockSound() {
     }
   }
 #  endif // HAVE_ALSA_ASOUNDLIB_H
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
   if (sample_size) {
     // Make an explosion sound by passing white noise through a low pass
@@ -310,7 +310,7 @@ BlockSound::BlockSound() {
 
 // Cleanup the BlockSound class
 BlockSound::~BlockSound() {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   if (sample_size) {
 #  if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5
     AudioDeviceStop(device, audio_proc_id);
@@ -339,7 +339,7 @@ BlockSound::~BlockSound() {
     snd_pcm_close(handle);
   }
 #  endif // HAVE_ALSA_ASOUNDLIB_H
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
   if (sample_size) {
     delete[] sample_data;
@@ -347,7 +347,7 @@ BlockSound::~BlockSound() {
 }
 
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 // Callback function for writing audio data...
 OSStatus
 BlockSound::audio_cb(AudioDeviceID device,
@@ -377,7 +377,7 @@ BlockSound::audio_cb(AudioDeviceID device,
 
   return noErr;
 }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 
 // Play a note for the given amount of time...
@@ -388,15 +388,15 @@ BlockSound::play_explosion(float duration) {
   if (duration <= 0.0)
     return;
 
-#if defined(__APPLE__) || defined(WIN32) || defined(HAVE_ALSA_ASOUNDLIB_H)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32) || defined(HAVE_ALSA_ASOUNDLIB_H)
   if (duration > 1.0)
     duration = 1.0;
 
   int samples = (int)(duration * sample_size);
   short *sample_ptr = sample_data + 2 * (sample_size - samples);
-#endif // __APPLE__ || WIN32 || HAVE_ALSA_ASOUNDLIB_H
+#endif // __APPLE_QUARTZ__ || WIN32 || HAVE_ALSA_ASOUNDLIB_H
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   // Point to the next note...
   data      = sample_ptr;
   remaining = samples * 2;
@@ -420,7 +420,7 @@ BlockSound::play_explosion(float duration) {
     }
     return;
   }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 }
 
 

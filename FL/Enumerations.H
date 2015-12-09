@@ -574,13 +574,13 @@ enum Fl_When { // Fl_Widget::when():
 #define FL_KEY_MASK 0x0000ffff		///< All keys are 16 bit for now 
 					//   FIXME: Unicode needs 24 bits!
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  define FL_COMMAND	FL_META		///< An alias for FL_CTRL on WIN32 and X11, or FL_META on MacOS X
 #  define FL_CONTROL 	FL_CTRL		///< An alias for FL_META on WIN32 and X11, or FL_CTRL on MacOS X
 #else
 #  define FL_COMMAND	FL_CTRL		///< An alias for FL_CTRL on WIN32 and X11, or FL_META on MacOS X
 #  define FL_CONTROL	FL_META		///< An alias for FL_META on WIN32 and X11, or FL_CTRL on MacOS X
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 /*@}*/		// group: Event States
 

@@ -32,7 +32,7 @@
  * Many other calls of the parent class don't work.
  */
 
-#if defined(__APPLE__) || defined(FL_DOXYGEN)
+#if defined(__APPLE_QUARTZ__) || defined(FL_DOXYGEN)
 #include <FL/Fl_Menu_Item.H>
 #include <FL/Fl_Sys_Menu_Bar.H>
 #include <FL/x.H>
@@ -524,7 +524,7 @@ void Fl_Mac_App_Menu::custom_application_menu_items(const Fl_Menu_Item *m)
     [item release];
   }
 }
-#endif /* __APPLE__ */
+#endif /* __APPLE_QUARTZ__ */
 
 //
 // End of "$Id$".

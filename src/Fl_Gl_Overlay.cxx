@@ -187,7 +187,7 @@ int Fl_Gl_Window::can_do_overlay() {
 void Fl_Gl_Window::redraw_overlay() {
   if (!shown()) return;
   make_overlay();
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   redraw();
 #else
 #ifndef WIN32
@@ -201,7 +201,7 @@ void Fl_Gl_Window::redraw_overlay() {
 
 void Fl_Gl_Window::make_overlay_current() {
   make_overlay();
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   // this is not very useful, but unfortunately, Apple decided
   // that front buffer drawing can no longer (OS X 10.4) be 
   // supported on their platforms.

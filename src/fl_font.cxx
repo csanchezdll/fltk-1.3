@@ -47,7 +47,7 @@
 
 #ifdef WIN32
 #  include "fl_font_win32.cxx"
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 #  include "fl_font_mac.cxx"
 #elif USE_XFT
 #  include "fl_font_xft.cxx"
@@ -55,7 +55,7 @@
 #  include "fl_font_x.cxx"
 #endif // WIN32
 
-#if ! (defined(WIN32) || defined(__APPLE__))
+#if ! (defined(WIN32) || defined(__APPLE_QUARTZ__))
 XFontStruct *fl_X_core_font()
 {
   return fl_xfont.value();
@@ -85,7 +85,7 @@ void fl_text_extents(const char *c, int &dx, int &dy, int &w, int &h) {
 
 
 void fl_draw(const char* str, int l, float x, float y) {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   fl_graphics_driver->draw(str, l, x, y);
 #else
   fl_draw(str, l, (int)x, (int)y);

@@ -30,7 +30,7 @@
     and does nothing useful under WIN32.
 */
 void Fl::display(const char *d) {
-#if defined(__APPLE__) || defined(WIN32)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32)
   (void)d;
 #else
   static char e[1024];
@@ -43,7 +43,7 @@ void Fl::display(const char *d) {
     }
   }
   putenv(e);
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 }
 
 //

@@ -49,7 +49,7 @@ private:
   int width;
   int height;
   Fl_Paged_Device *helper;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #elif defined(WIN32)
   HDC _sgc; 
   Window _sw; 
@@ -70,7 +70,7 @@ public:
   Fl_RGB_Image *image();
 };
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 /* Mac class to implement translate()/untranslate() for a flipped bitmap graphics context */
 class FL_EXPORT Fl_Quartz_Flipped_Surface_ : public Fl_Quartz_Surface_ {
 public:

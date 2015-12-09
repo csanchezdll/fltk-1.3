@@ -18,7 +18,7 @@
 
 #ifdef WIN32
 #  include "fl_dnd_win32.cxx"
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 //#  include "fl_dnd_mac.cxx"
 #else
 #  include "fl_dnd_x.cxx"

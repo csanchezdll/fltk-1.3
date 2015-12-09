@@ -32,15 +32,15 @@
 #include "Fl_Font.H"
 #include <FL/fl_utf8.h>
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 #include "Xutf8.h"
 #endif
 
-#if defined(__APPLE__) &&  MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
+#if defined(__APPLE_QUARTZ__) &&  MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
 #  include <OpenGL/glext.h>
 #  define kCGBitmapByteOrder32Host 0
 #  define GL_TEXTURE_RECTANGLE_ARB GL_TEXTURE_RECTANGLE_EXT
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 /** Returns the current font's height */
 int   gl_height() {return fl_height();}
@@ -55,7 +55,7 @@ double gl_width(uchar c) {return fl_width(c);}
 
 static Fl_Font_Descriptor *gl_fontsize;
 
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
 #  define USE_OksiD_style_GL_font_selection 1  // Most hosts except OSX
 #endif
 
@@ -69,7 +69,7 @@ static Fl_Font_Descriptor *gl_fontsize;
 void  gl_font(int fontid, int size) {
   fl_font(fontid, size);
   Fl_Font_Descriptor *fl_fontsize = fl_graphics_driver->font_descriptor();
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
   if (!fl_fontsize->listbase) {
 
 #ifdef  USE_OksiD_style_GL_font_selection
@@ -101,11 +101,11 @@ void  gl_font(int fontid, int size) {
 #endif // USE_OksiD_style_GL_font_selection
   }
   glListBase(fl_fontsize->listbase);
-#endif // !__APPLE__
+#endif // !__APPLE_QUARTZ__
   gl_fontsize = fl_fontsize;
 }
 
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
 static void get_list(int r) {
   gl_fontsize->glok[r] = 1;
 #if defined(USE_X11)
@@ -170,7 +170,7 @@ void gl_remove_displaylist_fonts()
 #endif
 }
 
-#if __APPLE__
+#if __APPLE_QUARTZ__
 static void gl_draw_textures(const char* str, int n);
 #endif
 
@@ -180,7 +180,7 @@ static void gl_draw_textures(const char* str, int n);
  \see On the Mac OS X platform, see gl_texture_pile_height(int)
   */
 void gl_draw(const char* str, int n) {
-#ifdef __APPLE__  
+#ifdef __APPLE_QUARTZ__  
   gl_draw_textures(str, n);
 #else
   static xchar *buf = NULL;
@@ -327,7 +327,7 @@ void gl_draw_image(const uchar* b, int x, int y, int w, int h, int d, int ld) {
   glDrawPixels(w,h,d<4?GL_RGB:GL_RGBA,GL_UNSIGNED_BYTE,(const ulong*)b);
 }
 
-#if __APPLE__ || defined(FL_DOXYGEN)
+#if __APPLE_QUARTZ__ || defined(FL_DOXYGEN)
 /* Text drawing to an OpenGL scene under Mac OS X is implemented using textures, as recommended by Apple.
  This allows to use any font at any size, and any Unicode character.
  Some old Apple hardware doesn't implement the required GL_EXT_texture_rectangle extension.
@@ -568,7 +568,7 @@ void gl_texture_reset()
 {
   if (gl_fifo) gl_texture_pile_height(gl_texture_pile_height());
 }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 #endif // HAVE_GL
 

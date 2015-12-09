@@ -177,7 +177,7 @@
  * Byte order of your machine: 1 = big-endian, 0 = little-endian.
  */
  
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #include <mac_endianness.h>
 #else
 #define WORDS_BIGENDIAN 0

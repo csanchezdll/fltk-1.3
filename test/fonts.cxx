@@ -156,7 +156,7 @@ int main(int argc, char **argv) {
   create_the_forms();
 
 // For the Unicode test, get all fonts...
-//#ifdef __APPLE__
+//#ifdef __APPLE_QUARTZ__
   int i = 0;
 //#else
 //  int i = fl_choice("Which fonts:","-*","iso8859","All");

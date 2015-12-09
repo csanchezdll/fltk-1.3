@@ -24,7 +24,7 @@
 //     http://www.fltk.org/str.php
 //
 
-#if defined(WIN32) || defined(__APPLE__)
+#if defined(WIN32) || defined(__APPLE_QUARTZ__)
 #include <FL/Fl.H>
 #include <FL/fl_message.H>
 

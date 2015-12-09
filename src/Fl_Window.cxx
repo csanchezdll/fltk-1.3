@@ -88,7 +88,7 @@ Fl_Window::~Fl_Window() {
   delete icon_;
   if (shape_data_) {
     if (shape_data_->todelete_) delete shape_data_->todelete_;
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
     if (shape_data_->mask) {
       CGImageRelease(shape_data_->mask);
     }
@@ -402,7 +402,7 @@ void Fl_Window::free_icons() {
 }
 
 
-#ifndef __APPLE__
+#ifndef __APPLE_QUARTZ__
 /**
   Waits for the window to be displayed after calling show().
 
@@ -470,7 +470,7 @@ void Fl_Window::wait_for_expose() {
     Fl::wait();
   }
 }
-#endif  // ! __APPLE__
+#endif  // ! __APPLE_QUARTZ__
 
 //
 // End of "$Id$".

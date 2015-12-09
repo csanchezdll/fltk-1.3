@@ -22,7 +22,7 @@
 #include <FL/Fl.H>
 #include <FL/x.H>
 #include <FL/Fl_Window.H>
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #include <Carbon/Carbon.h>
 #endif
 

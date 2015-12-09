@@ -56,11 +56,11 @@
 #  include <os2.h>
 #endif // __EMX__
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 #  include <sys/param.h>
 #  include <sys/ucred.h>
 #  include <sys/mount.h>
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 #if defined(_AIX)
 extern "C" {
@@ -512,7 +512,7 @@ Fl_File_Browser::load(const char     *directory,// I - Directory to load
 
 	num_files ++;
       }
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
     // MacOS X and Darwin use getfsstat() system call...
     int			numfs;	// Number of file systems
     struct statfs	*fs;	// Buffer for file system info
@@ -658,7 +658,7 @@ Fl_File_Browser::load(const char     *directory,// I - Directory to load
       // window after requesting filesystem list.
       add("/", icon);
     }
-#endif // WIN32 || __EMX__ || __APPLE__ || _AIX || ...
+#endif // WIN32 || __EMX__ || __APPLE_QUARTZ__ || _AIX || ...
   }
   else
   {

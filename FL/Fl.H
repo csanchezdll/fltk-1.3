@@ -155,7 +155,7 @@ public: // should be private!
   static Fl_Window* grab_;
   static int compose_state; // used for dead keys (WIN32) or marked text (MacOS)
   static void call_screen_init(); // recompute screen number and dimensions
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   static void reset_marked_text(); // resets marked text
   static void insertion_point_location(int x, int y, int height); // sets window coordinates & height of insertion point
 #endif
@@ -857,7 +857,7 @@ public:
   static void copy(const char* stuff, int len, int destination = 0);
 #endif
   
-#if !(defined(__APPLE__) || defined(WIN32) || defined(FL_DOXYGEN))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32) || defined(FL_DOXYGEN))
   static void copy_image(const unsigned char* data, int W, int H, int destination = 0); // platform dependent
 #endif
   /**

@@ -16,7 +16,7 @@
  *     http://www.fltk.org/str.php
  */
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 
 #ifndef CP936
 #ifdef NEED_TOWC
@@ -6243,7 +6243,7 @@ cp936ext_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 
 #endif /* CP936 */
 
-#endif /* __APPLE__  WIN32 */
+#endif /* __APPLE_QUARTZ__  WIN32 */
 
 /*
  * End of "$Id$".

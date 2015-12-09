@@ -18,7 +18,7 @@
  * Unicode to UTF-8 conversion functions.
  */
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 
 #include "../Xutf8.h"
 

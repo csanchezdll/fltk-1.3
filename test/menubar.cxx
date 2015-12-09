@@ -170,7 +170,7 @@ Fl_Menu_Item pulldown[] = {
   {0}
 };
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 Fl_Menu_Item menu_location[] = {
   {"Fl_Menu_Bar",	0, 0, 0, FL_MENU_VALUE},
   {"Fl_Sys_Menu_Bar",	},
@@ -195,7 +195,7 @@ void menu_location_cb(Fl_Widget* w, void* data)
     menubar->show();
     }
 }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 #define WIDTH 700
 
@@ -231,14 +231,14 @@ int main(int argc, char **argv) {
   Fl_Box b(200,200,200,100,"Press right button\nfor a pop-up menu");
   window.resizable(&mb);
   window.size_range(300,400,0,400);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   Fl_Choice ch2(500,100,150,25,"Use:"); 
   ch2.menu(menu_location);
   ch2.callback(menu_location_cb, &menubar);
 #endif
   window.end();
   
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   Fl_Menu_Item custom[] = {
     {"Preferences…",	0,	test_cb, NULL, FL_MENU_DIVIDER},
     {"Radio1",	0,	test_cb, NULL, FL_MENU_RADIO|FL_MENU_VALUE},

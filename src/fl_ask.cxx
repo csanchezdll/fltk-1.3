@@ -54,7 +54,7 @@ static const char *message_title_default;
 Fl_Font fl_message_font_ = FL_HELVETICA;
 Fl_Fontsize fl_message_size_ = -1;
 static int enableHotspot = 1;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 extern "C" void NSBeep(void);
 #endif
 
@@ -300,7 +300,7 @@ void fl_beep(int type) {
       MessageBeep(0xFFFFFFFF);
       break;
   }
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
   switch (type) {
     case FL_BEEP_DEFAULT :
     case FL_BEEP_ERROR :

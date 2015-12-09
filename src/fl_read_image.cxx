@@ -25,7 +25,7 @@
 #  include <stdio.h>
 #endif // DEBUG
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 #  include "fl_read_image_mac.cxx"
 #else
 #  include <FL/Fl_RGB_Image.H>
@@ -628,7 +628,7 @@ static uchar *read_win_rectangle(uchar *p, int X, int Y, int w, int h, int alpha
 
 #endif // !WIN32
 
-#endif // !__APPLE__
+#endif // !__APPLE_QUARTZ__
 
 //
 // End of "$Id$".

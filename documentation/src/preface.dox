@@ -68,10 +68,10 @@ The Microsoft Windows Application Programmer's Interface for Windows 2000,
 Windows XP, Windows Vista, and Windows 7. FLTK uses the preprocessor definition
 <tt>WIN32</tt> for the 32 bit and 64 bit MS Windows API.
 
-\par OS X, <tt>__APPLE__</tt>
+\par OS X, <tt>__APPLE_QUARTZ__</tt>
 The Apple desktop operating sytem OS X 10.0 and later. MacOS 8 and 9 support
 was dropped after FLTK 1.0.10. FLTK uses the preprocessor definition
-<tt>__APPLE__</tt> for OS X.
+<tt>__APPLE_QUARTZ__</tt> for OS X.
 
 \section preface_copyrights Copyrights and Trademarks
 

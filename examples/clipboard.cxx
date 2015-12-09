@@ -130,7 +130,7 @@ void clip_callback(int source, void *data) { // called after clipboard was chang
 
 int main(int argc, char **argv)
 {
-#if !(defined(__APPLE__) || defined(WIN32))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32))
   extern void fl_register_images();
   fl_register_images(); // required to allow pasting of images
 #endif
@@ -158,7 +158,7 @@ int main(int argc, char **argv)
   win->end();
   win->resizable(tabs);
   win->show(argc,argv);
-#if defined(__APPLE__) || defined(WIN32)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32)
   clip_callback(1, tabs); // use clipboard content at start
 #endif
   Fl::add_clipboard_notify(clip_callback, tabs); // will update with new clipboard content immediately or at application activation

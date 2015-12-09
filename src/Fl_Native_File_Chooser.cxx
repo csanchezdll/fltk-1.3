@@ -22,12 +22,12 @@
 #endif
 
 // Use Apple's chooser
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #include <FL/Fl_Native_File_Chooser.H>
 #endif
 
 // All else falls back to FLTK's own chooser
-#if ! defined(__APPLE__) && !defined(WIN32)
+#if ! defined(__APPLE_QUARTZ__) && !defined(WIN32)
 #include "Fl_Native_File_Chooser_FLTK.cxx"
 #endif
 

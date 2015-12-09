@@ -28,7 +28,7 @@
 
 #  ifdef WIN32
 #    include "win32.H"
-#  elif defined(__APPLE__)
+#  elif defined(__APPLE_QUARTZ__)
 #    include "mac.H"
 #  else
 #    if defined(_ABIN32) || defined(_ABI64) // fix for broken SGI Irix X .h files

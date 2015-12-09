@@ -46,7 +46,7 @@ static int pw, ph;
 static Fl_Gl_Choice* gl_choice;
 #endif
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 static Fl_Gl_Choice* gl_choice;
 #endif
 
@@ -67,7 +67,7 @@ void gl_start() {
 #endif
   }
   fl_set_gl_context(Fl_Window::current(), context);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   Fl_X::GLcontext_update(context); // supports window resizing
 #elif !defined(WIN32)
   glXWaitX();
@@ -97,7 +97,7 @@ void gl_start() {
 /** Releases an OpenGL context */
 void gl_finish() {
   glFlush();
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
   glXWaitGL();
 #endif
 }

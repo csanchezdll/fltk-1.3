@@ -26,7 +26,7 @@
 
 #ifdef WIN32
 # include <malloc.h> // needed for VisualC2010
-#elif !defined(__APPLE__)
+#elif !defined(__APPLE_QUARTZ__)
 #include <config.h>
 #if HAVE_DLFCN_H
 #include <dlfcn.h>
@@ -36,7 +36,7 @@
 #endif
 
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 
 static void MyProviderReleaseData (void *info, const void *data, size_t size) {
   delete[] (uchar*)data;
@@ -165,12 +165,12 @@ void Fl_Window::combine_mask()
 }
 #endif // !FL_DOXYGEN
 
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 
 void Fl_Window::shape_bitmap_(Fl_Image* b) {
   shape_data_->shape_ = b;
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
   if (b) {
     // complement mask bits and perform bitwise inversion of all bytes and also reverse top and bottom
     int bytes_per_row = (b->w() + 7)/8;
@@ -191,7 +191,7 @@ void Fl_Window::shape_bitmap_(Fl_Image* b) {
 }
 
 
-#if defined(__APPLE__) // on the mac, use an 8-bit mask
+#if defined(__APPLE_QUARTZ__) // on the mac, use an 8-bit mask
 /* the image can be of any depth
  offset gives the byte offset from the pixel start to the byte used to construct the shape
  */
@@ -319,7 +319,7 @@ void Fl_Window::shape(const Fl_Image* img) {
 #if FLTK_ABI_VERSION >= 10303
   if (shape_data_) {
     if (shape_data_->todelete_) { delete shape_data_->todelete_; }
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
     if (shape_data_->mask) { CGImageRelease(shape_data_->mask); }
 #endif
     }
@@ -338,7 +338,7 @@ void Fl_Window::shape(const Fl_Image* img) {
 
 void Fl_Window::draw() {
   if (shape_data_) {
-# if defined(__APPLE__) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+# if defined(__APPLE_QUARTZ__) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
     if (shape_data_->mask && (&CGContextClipToMask != NULL)) {
       CGContextClipToMask(fl_gc, CGRectMake(0,0,w(),h()), shape_data_->mask); // requires Mac OS 10.4
     }
@@ -353,7 +353,7 @@ void Fl_Window::draw() {
       SetWindowRgn(fl_xid(this), region, TRUE); // the system deletes the region when it's no longer needed
       delete temp;
     }
-#elif !(defined(__APPLE__) || defined(WIN32))
+#elif !(defined(__APPLE_QUARTZ__) || defined(WIN32))
     if (( shape_data_->lw_ != w() || shape_data_->lh_ != h() ) && shape_data_->shape_) {
         // size of window has changed since last time
     combine_mask();
@@ -409,7 +409,7 @@ void Fl_Window::draw() {
     }
   }
 #endif
-# if defined(__APPLE__) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
+# if defined(__APPLE_QUARTZ__) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
   if (shape_data_) CGContextRestoreGState(fl_gc);
 # endif
   

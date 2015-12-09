@@ -38,7 +38,7 @@
 #    include <dlfcn.h>
 #  endif // HAVE_DLFCN_H
 #  define MAXWINDOWS 32
-#  ifdef __APPLE__
+#  ifdef __APPLE_QUARTZ__
 #    include <FL/x.H>
 #  endif
 static Fl_Glut_Window *windows[MAXWINDOWS+1];

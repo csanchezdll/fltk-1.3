@@ -17,7 +17,7 @@
 //
 
 // Do not directly include this file, instead use <FL/x.H>.  It will
-// include this file if "__APPLE__" is defined.  This is to encourage
+// include this file if "__APPLE_QUARTZ__" is defined.  This is to encourage
 // portability of even the system-specific code...
 #ifndef FL_DOXYGEN
 

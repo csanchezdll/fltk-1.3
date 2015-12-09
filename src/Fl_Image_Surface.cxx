@@ -29,7 +29,7 @@ const char *Fl_Image_Surface::class_id = "Fl_Image_Surface";
 Fl_Image_Surface::Fl_Image_Surface(int w, int h) : Fl_Surface_Device(NULL) {
   width = w;
   height = h;
-#if !(defined(__APPLE__) || defined(WIN32))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32))
   gc = 0;
   if (!fl_gc) { // allows use of this class before any window is shown
     fl_open_display();
@@ -38,7 +38,7 @@ Fl_Image_Surface::Fl_Image_Surface(int w, int h) : Fl_Surface_Device(NULL) {
     }
 #endif
   offscreen = fl_create_offscreen(w, h);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   helper = new Fl_Quartz_Flipped_Surface_(width, height);
   driver(helper->driver());
   CGContextSaveGState(offscreen);
@@ -57,7 +57,7 @@ Fl_Image_Surface::Fl_Image_Surface(int w, int h) : Fl_Surface_Device(NULL) {
  */
 Fl_Image_Surface::~Fl_Image_Surface() {
   fl_delete_offscreen(offscreen);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   delete (Fl_Quartz_Flipped_Surface_*)helper;
 #elif defined(WIN32)
   delete (Fl_GDI_Surface_*)helper;
@@ -73,7 +73,7 @@ Fl_Image_Surface::~Fl_Image_Surface() {
 Fl_RGB_Image* Fl_Image_Surface::image()
 {
   unsigned char *data;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   CGContextFlush(offscreen);
   data = fl_read_image(NULL, 0, 0, width, height, 0);
   fl_gc = 0;
@@ -110,7 +110,7 @@ void Fl_Image_Surface::draw(Fl_Widget *widget, int delta_x, int delta_y)
 
 void Fl_Image_Surface::set_current()
 {
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
   fl_gc = offscreen; fl_window = 0;
   Fl_Surface_Device::set_current();
 #elif defined(WIN32)
@@ -131,7 +131,7 @@ void Fl_Image_Surface::set_current()
 #endif
 }
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 
 Fl_Quartz_Flipped_Surface_::Fl_Quartz_Flipped_Surface_(int w, int h) : Fl_Quartz_Surface_(w, h) {
 }
@@ -151,7 +151,7 @@ void Fl_Quartz_Flipped_Surface_::untranslate() {
 
 const char *Fl_Quartz_Flipped_Surface_::class_id = "Fl_Quartz_Flipped_Surface_";
 
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 //
 // End of "$Id$".

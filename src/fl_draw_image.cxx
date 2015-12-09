@@ -28,7 +28,7 @@
 
 #ifdef WIN32
 #  include "fl_draw_image_win32.cxx"
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 #  include "fl_draw_image_mac.cxx"
 #else
 

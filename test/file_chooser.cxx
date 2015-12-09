@@ -104,7 +104,7 @@ main(int  argc,		// I - Number of command-line arguments
 
   filter = new Fl_Input(50, 10, 315, 25, "Filter:");
   int argn = 1;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   // OS X may add the process number as the first argument - ignore
   if (argc>argn && strncmp(argv[1], "-psn_", 5)==0)
     argn++;

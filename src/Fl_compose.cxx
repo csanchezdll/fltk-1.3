@@ -27,12 +27,12 @@ Utility functions to support text input.
 
 #ifndef FL_DOXYGEN
 int Fl::compose_state = 0;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 int Fl_X::next_marked_length = 0;
 #endif
 #endif
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 extern XIC fl_xim_ic;
 #endif
 
@@ -78,7 +78,7 @@ extern XIC fl_xim_ic;
  */
 int Fl::compose(int& del) {
   int condition;
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
   int has_text_key = Fl::compose_state || Fl::e_keysym <= '~' || Fl::e_keysym == FL_Iso_Key ||
   (Fl::e_keysym >= FL_KP && Fl::e_keysym <= FL_KP_Last && Fl::e_keysym != FL_KP_Enter);
   condition = Fl::e_state&(FL_META | FL_CTRL) || 
@@ -91,10 +91,10 @@ unsigned char ascii = (unsigned char)e_text[0];
 #else
   condition = (e_state & (FL_ALT | FL_META | FL_CTRL)) && !(ascii & 128) ;
 #endif // WIN32
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
   if (condition) { del = 0; return 0;} // this stuff is to be treated as a function key
   del = Fl::compose_state;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   Fl::compose_state = Fl_X::next_marked_length;
 #else
   Fl::compose_state = 0;
@@ -104,7 +104,7 @@ unsigned char ascii = (unsigned char)e_text[0];
   return 1;
 }
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 static int insertion_point_x = 0;
 static int insertion_point_y = 0;
 static int insertion_point_height = 0;
@@ -130,7 +130,7 @@ void Fl::insertion_point_location(int x, int y, int height) {
   insertion_point_y = y;
   insertion_point_height = height;
 }
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 /**
  If the user moves the cursor, be sure to call Fl::compose_reset().
@@ -141,7 +141,7 @@ void Fl::insertion_point_location(int x, int y, int height) {
 void Fl::compose_reset()
 {
   Fl::compose_state = 0;
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
   if (fl_xim_ic) XmbResetIC(fl_xim_ic);
 #endif
 }

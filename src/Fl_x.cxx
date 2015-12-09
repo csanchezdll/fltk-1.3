@@ -18,7 +18,7 @@
 
 #ifdef WIN32
 //#  include "Fl_win32.cxx"
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 //#  include "Fl_mac.cxx"	// now Fl_cocoa.mm
 #elif !defined(FL_DOXYGEN)
 

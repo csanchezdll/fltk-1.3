@@ -20,7 +20,7 @@
 #include <FL/Fl.H>
 
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 #include <ApplicationServices/ApplicationServices.h>
 
 Fl_Quartz_Surface_::Fl_Quartz_Surface_(int w, int h) : Fl_System_Printer(), width(w), height(h) {
@@ -72,7 +72,7 @@ Fl_Copy_Surface::Fl_Copy_Surface(int w, int h) :  Fl_Surface_Device(NULL)
 {
   width = w;
   height = h;
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   helper = new Fl_Quartz_Surface_(width, height);
   driver(helper->driver());
   prepare_copy_pdf_and_tiff(w, h);
@@ -115,7 +115,7 @@ Fl_Copy_Surface::Fl_Copy_Surface(int w, int h) :  Fl_Surface_Device(NULL)
  */
 Fl_Copy_Surface::~Fl_Copy_Surface()
 {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   complete_copy_pdf_and_tiff();
   fl_gc = oldgc;
   delete (Fl_Quartz_Surface_*)helper;
@@ -158,7 +158,7 @@ void Fl_Copy_Surface::draw(Fl_Widget* widget, int delta_x, int delta_y)
 
 void Fl_Copy_Surface::set_current()
 {
-#if defined(__APPLE__) || defined(WIN32)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32)
   fl_gc = gc;
   fl_window = (Window)1;
   Fl_Surface_Device::set_current();
@@ -171,7 +171,7 @@ void Fl_Copy_Surface::set_current()
 }
 
 
-#if defined(__APPLE__)
+#if defined(__APPLE_QUARTZ__)
 
 size_t Fl_Copy_Surface::MyPutBytes(void* info, const void* buffer, size_t count)
   {
@@ -209,9 +209,9 @@ void Fl_Copy_Surface::prepare_copy_pdf_and_tiff(int w, int h)
   CGContextSaveGState(gc);
 }
 
-#endif  // __APPLE__
+#endif  // __APPLE_QUARTZ__
 
-#if !defined(__APPLE__)
+#if !defined(__APPLE_QUARTZ__)
 /** Copies a window and its borders and title bar to the clipboard. */
 void Fl_Copy_Surface::draw_decorated_window(Fl_Window* win, int delta_x, int delta_y)
 {
@@ -219,7 +219,7 @@ void Fl_Copy_Surface::draw_decorated_window(Fl_Window* win, int delta_x, int del
 }
 #endif
 
-#if !(defined(__APPLE__) || defined(WIN32) || defined(FL_DOXYGEN))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32) || defined(FL_DOXYGEN))
 /* graphics driver that translates all graphics coordinates before calling Xlib */
 class Fl_translated_Xlib_Graphics_Driver_ : public Fl_Xlib_Graphics_Driver {
   int offset_x, offset_y; // translation between user and graphical coordinates: graphical = user + offset

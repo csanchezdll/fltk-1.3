@@ -101,7 +101,7 @@ static const char* expand_text_(const char* from, char*& buf, int maxbuf, double
  Also, invalid UTF-8 sequences are copied unchanged by this procedure.
  Therefore, checking for tab, space, control, & or @, and copying the byte otherwise, is enough.
  } else  if (handle_utf8_seq(p, o)) { // figure out if we have an utf8 valid sequence before we determine the nbsp test validity:
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
     } else if (c == 0xCA) { // non-breaking space in MacRoman
 #else
     } else if (c == 0xA0) { // non-breaking space in ISO 8859

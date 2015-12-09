@@ -41,7 +41,7 @@
 
 void Fl::own_colormap() {}
 
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 // MacOS X always provides a TrueColor interface...
 
 void Fl::own_colormap() {}

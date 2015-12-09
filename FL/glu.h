@@ -38,7 +38,7 @@
 #    endif
 #  endif
 
-#  ifdef __APPLE__
+#  ifdef __APPLE_QUARTZ__
 #    include <OpenGL/glu.h>
 #  else
 #    include <GL/glu.h>

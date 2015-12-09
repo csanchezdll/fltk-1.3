@@ -30,13 +30,13 @@
 #include <FL/Fl_RGB_Image.H>
 #include <FL/Fl_Bitmap.H>
 #include <stdio.h>
-#if !(defined(__APPLE__) || defined(WIN32))
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32))
 #include <FL/Fl_PostScript.H>
 #elif defined(WIN32)
 #include <commdlg.h>
 #endif
 
-#if defined(__APPLE__) || defined(WIN32) || defined(FL_DOXYGEN)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32) || defined(FL_DOXYGEN)
 /**
  Print support under MSWindows and Mac OS.
 
@@ -50,7 +50,7 @@ private:
   /** \brief the printer's graphics context, if there's one, NULL otherwise */
   void *gc; 
   void set_current(void);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   float scale_x;
   float scale_y;
   float angle; // rotation angle in radians
@@ -84,7 +84,7 @@ public:
   void untranslate(void);
   int end_page (void);
   void end_job (void);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   void print_window_part(Fl_Window *win, int x, int y, int w, int h, int delta_x, int delta_y);
 #endif
   /** \brief The destructor */
@@ -93,7 +93,7 @@ public:
 
 #endif
   
-#if !(defined(__APPLE__) || defined(WIN32) )
+#if !(defined(__APPLE_QUARTZ__) || defined(WIN32) )
 /**
  Print support under Unix/Linux.
  
@@ -222,7 +222,7 @@ public:
   static const char *property_cancel;
   /** \} */ 
 private:
-#if defined(WIN32) || defined(__APPLE__)
+#if defined(WIN32) || defined(__APPLE_QUARTZ__)
   Fl_System_Printer *printer;
 #else
   Fl_PostScript_Printer *printer;

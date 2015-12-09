@@ -22,7 +22,7 @@
 #  include "Fl_Widget.H"
 #  include "Fl_Image.H"
 
-#  if defined(__APPLE__) && defined(check)
+#  if defined(__APPLE_QUARTZ__) && defined(check)
 #    undef check
 #  endif
 

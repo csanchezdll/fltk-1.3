@@ -163,7 +163,7 @@ void fl_delete_bitmask(Fl_Bitmask bm) {
 }
 
 
-#endif // __APPLE__
+#endif // __APPLE_QUARTZ__
 
 
 // Create a 1-bit mask used for alpha blending
@@ -268,7 +268,7 @@ int Fl_Bitmap::start(int XP, int YP, int WP, int HP, int &cx, int &cy,
   return 0;
 }
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 void Fl_Quartz_Graphics_Driver::draw(Fl_Bitmap *bm, int XP, int YP, int WP, int HP, int cx, int cy) {
   int X, Y, W, H;
   if (bm->start(XP, YP, WP, HP, cx, cy, X, Y, W, H)) {

@@ -64,17 +64,17 @@ const char *Fl_Printer::property_save = "Save";
 const char *Fl_Printer::property_cancel = "Cancel";
 
 const char *Fl_Printer::class_id = "Fl_Printer";
-#if defined(__APPLE__) || defined(WIN32) || defined(FL_DOXYGEN)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32) || defined(FL_DOXYGEN)
 const char *Fl_System_Printer::class_id = Fl_Printer::class_id;
 #endif
-#if !( defined(__APPLE__) || defined(WIN32) )
+#if !( defined(__APPLE_QUARTZ__) || defined(WIN32) )
 const char *Fl_PostScript_Printer::class_id = Fl_Printer::class_id;
 #endif
 
-#if defined(__APPLE__) || defined(WIN32)
+#if defined(__APPLE_QUARTZ__) || defined(WIN32)
 void Fl_System_Printer::set_current(void)
 {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   fl_gc = (CGContextRef)gc;
 #elif defined(WIN32)
   fl_gc = (HDC)gc;
@@ -90,7 +90,7 @@ void Fl_System_Printer::origin(int *x, int *y)
 #endif
 
 Fl_Printer::Fl_Printer(void) {
-#if defined(WIN32) || defined(__APPLE__)
+#if defined(WIN32) || defined(__APPLE_QUARTZ__)
   printer = new Fl_System_Printer();
 #else
   printer = new Fl_PostScript_Printer();

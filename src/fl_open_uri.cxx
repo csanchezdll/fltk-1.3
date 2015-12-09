@@ -45,9 +45,9 @@
 // Local functions...
 //
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 static char	*path_find(const char *program, char *filename, int filesize);
-#endif // !WIN32 && !__APPLE__
+#endif // !WIN32 && !__APPLE_QUARTZ__
 #ifndef WIN32
 static int	run_program(const char *program, char **argv, char *msg, int msglen);
 #endif // !WIN32
@@ -131,7 +131,7 @@ fl_open_uri(const char *uri, char *msg, int msglen) {
 
   return (int)(ShellExecute(HWND_DESKTOP, "open", uri, NULL, NULL, SW_SHOW) > (void *)32);
 
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
   char	*argv[3];			// Command-line arguments
 
   argv[0] = (char*)"open";
@@ -142,7 +142,7 @@ fl_open_uri(const char *uri, char *msg, int msglen) {
 
   return run_program("/usr/bin/open", argv, msg, msglen) != 0;
 
-#else // !WIN32 && !__APPLE__
+#else // !WIN32 && !__APPLE_QUARTZ__
   // Run any of several well-known commands to open the URI.
   //
   // We give preference to the Portland group's xdg-utils
@@ -267,7 +267,7 @@ void fl_decode_uri(char *uri)
 
 /**   @} */
 
-#if !defined(WIN32) && !defined(__APPLE__)
+#if !defined(WIN32) && !defined(__APPLE_QUARTZ__)
 // Find a program in the path...
 static char *path_find(const char *program, char *filename, int filesize) {
   const char	*path;			// Search path
@@ -299,7 +299,7 @@ static char *path_find(const char *program, char *filename, int filesize) {
 
   return 0;
 }
-#endif // !WIN32 && !__APPLE__
+#endif // !WIN32 && !__APPLE_QUARTZ__
 
 
 #ifndef WIN32

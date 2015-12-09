@@ -61,7 +61,7 @@ Fl_PostScript_Graphics_Driver::~Fl_PostScript_Graphics_Driver() {
  */
 Fl_PostScript_File_Device::Fl_PostScript_File_Device(void)
 {
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   gc = fl_gc; // the display context is used by fl_text_extents()
 #endif
   Fl_Surface_Device::driver( new Fl_PostScript_Graphics_Driver() );
@@ -167,7 +167,7 @@ int Fl_PostScript_Graphics_Driver::clocale_printf(const char *format, ...)
 
 #ifndef FL_DOXYGEN
 
-#if ! (defined(__APPLE__) || defined(WIN32) )
+#if ! (defined(__APPLE_QUARTZ__) || defined(WIN32) )
 #  include "print_panel.cxx"
 #endif
 
@@ -1553,7 +1553,7 @@ void Fl_PostScript_File_Device::end_job (void)
 
 #endif // FL_DOXYGEN
 
-#if ! (defined(__APPLE__) || defined(WIN32) )
+#if ! (defined(__APPLE_QUARTZ__) || defined(WIN32) )
 /** Starts a print job. */
 int Fl_PostScript_Printer::start_job(int pages, int *firstpage, int *lastpage) {
   enum Fl_Paged_Device::Page_Format format;
@@ -1651,7 +1651,7 @@ int Fl_PostScript_Printer::start_job(int pages, int *firstpage, int *lastpage) {
   return ps->start_postscript(pages, format, layout); // start printing
 }
 
-#endif // ! (defined(__APPLE__) || defined(WIN32) )
+#endif // ! (defined(__APPLE_QUARTZ__) || defined(WIN32) )
 
 
 //

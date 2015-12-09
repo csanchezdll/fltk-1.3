@@ -53,7 +53,7 @@
 #    undef chdir
 #    define chdir _chdir
 #  endif
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 #  include <wchar.h>
 #  include <sys/stat.h>
 #  define xchar wchar_t

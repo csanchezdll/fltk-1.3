@@ -114,7 +114,7 @@ static void screen_init() {
   screens[0].bottom = GetSystemMetrics(SM_CYSCREEN);
   work_area[0] = screens[0];
 }
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
 static XRectangle screens[16];
 static float dpi_h[16];
 static float dpi_v[16];
@@ -249,7 +249,7 @@ void Fl::screen_work_area(int &X, int &Y, int &W, int &H, int n) {
   Y = work_area[n].top;
   W = work_area[n].right - X;
   H = work_area[n].bottom - Y;
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
   Fl_X::screen_work_area(X, Y, W, H, n);
 #else
   if (n == 0) { // for the main screen, these return the work area
@@ -289,7 +289,7 @@ void Fl::screen_xywh(int &X, int &Y, int &W, int &H, int n) {
     W = GetSystemMetrics(SM_CXSCREEN);
     H = GetSystemMetrics(SM_CYSCREEN);
   }
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
   X = screens[n].x;
   Y = screens[n].y;
   W = screens[n].width;
@@ -385,7 +385,7 @@ void Fl::screen_dpi(float &h, float &v, int n)
     h = float(dpi[n][0]);
     v = float(dpi[n][1]);
   }
-#elif defined(__APPLE__)
+#elif defined(__APPLE_QUARTZ__)
   if (n >= 0 && n < num_screens) {
     h = dpi_h[n];
     v = dpi_v[n];

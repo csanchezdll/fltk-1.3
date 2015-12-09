@@ -58,7 +58,7 @@ void Fl_Paged_Device::print_widget(Fl_Widget* widget, int delta_x, int delta_y)
   // if widget is a main window, clip all drawings to the window area
   if (is_window && !widget->window()) {
     fl_push_clip(0, 0, widget->w(), widget->h() );
-#ifdef __APPLE__ // for Mac OS X 10.6 and above, make window with rounded bottom corners
+#ifdef __APPLE_QUARTZ__ // for Mac OS X 10.6 and above, make window with rounded bottom corners
     if ( fl_mac_os_version >= 100600 && driver()->class_name() == Fl_Quartz_Graphics_Driver::class_id ) {
       CGContextRestoreGState(fl_gc);
       Fl_X::clip_to_rounded_corners(fl_gc, widget->w(), widget->h());
@@ -139,7 +139,7 @@ void Fl_Paged_Device::print_window_part(Fl_Window *win, int x, int y, int w, int
   win->make_current();
   uchar *image_data;
   image_data = fl_read_image(NULL, x, y, w, h);
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
   Fl_X::q_release_context(); // matches make_current() call above
 #endif
   if (save_front != win) save_front->show();

@@ -39,12 +39,12 @@ typedef void fl_BROWSEINFOW;
 #endif
 
 // Use Apple's chooser
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 #  define MAXFILTERS	80
 #endif
 
 // All else falls back to FLTK's own chooser
-#if ! defined(__APPLE__) && !defined(WIN32)
+#if ! defined(__APPLE_QUARTZ__) && !defined(WIN32)
 #  include <FL/Fl_File_Chooser.H>
 #else
 #  include <FL/filename.H>	// FL_EXPORT
@@ -194,7 +194,7 @@ private:
   void add_filter(const char *, const char *);
 #endif
 
-#ifdef __APPLE__
+#ifdef __APPLE_QUARTZ__
 private:
   int             _btype;		// kind-of browser to show()
   int             _options;		// general options
@@ -232,7 +232,7 @@ private:
   int runmodal();
 #endif
 
-#if ! defined(__APPLE__) && !defined(WIN32)
+#if ! defined(__APPLE_QUARTZ__) && !defined(WIN32)
 private:
 #if FLTK_ABI_VERSION <= 10302
   int   _btype;			// kind-of browser to show()
@@ -254,7 +254,7 @@ private:
 #endif
 };
 
-#if !defined(__APPLE__) && !defined(WIN32)
+#if !defined(__APPLE_QUARTZ__) && !defined(WIN32)
 class FL_EXPORT Fl_FLTK_File_Chooser {
   friend class Fl_Native_File_Chooser;
 protected:
@@ -338,7 +338,7 @@ private:
   static int custom_gtk_filter_function(const GtkFileFilterInfo*, Fl_GTK_File_Chooser::pair*);
   static void free_pair(pair *p);
 };
-#endif // !defined(__APPLE__) && !defined(WIN32)
+#endif // !defined(__APPLE_QUARTZ__) && !defined(WIN32)
 
 #endif /*FL_NATIVE_FILE_CHOOSER_H*/
 
