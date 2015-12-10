@@ -46,13 +46,8 @@ case $host_os in
         if test "x$with_archflags" != x ; then
             CFLAGS="$CFLAGS $with_archflags"
         fi
-        USEMMFILES="Yes"
-        ;;
-    *)
-        USEMMFILES="No"
         ;;
 esac
-AC_SUBST(USEMMFILES)
 
 dnl FLTK library versions...
 FL_MAJOR_VERSION=1
@@ -824,6 +819,8 @@ AC_ARG_WITH(links, [  --with-links            make header links for common missp
 INSTALL_DESKTOP=""
 UNINSTALL_DESKTOP=""
 
+USEMMFILES="No"
+
 case $host_os_gui in
     cygwin* | mingw*)
 	dnl Cygwin environment, using windows GDI ...
@@ -871,6 +868,8 @@ case $host_os_gui in
 
     darwin*)
 	AC_DEFINE(__APPLE_QUARTZ__)
+
+        USEMMFILES="Yes"
 
         # MacOS X uses Cocoa for graphics.
         LIBS="$LIBS -framework Cocoa"
@@ -1084,6 +1083,8 @@ AC_SUBST(THREADS)
 
 AC_SUBST(INSTALL_DESKTOP)
 AC_SUBST(UNINSTALL_DESKTOP)
+
+AC_SUBST(USEMMFILES)
 
 dnl Figure out the appropriate formatted man page extension...
 case "$host_os" in
