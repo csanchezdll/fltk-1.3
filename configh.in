@@ -40,6 +40,14 @@
 
 #define BORDER_WIDTH 2
 
+/* HAVE_X11_XREGION_H:
+ *
+ * Do you have X11/Xregion.h? This is a non-standard X11 header file, which
+ * might noe be present. It is used for clip regions which are not rectangular.
+ */
+
+#undef HAVE_X11_XREGION_H
+
 /*
  * HAVE_GL:
  *
