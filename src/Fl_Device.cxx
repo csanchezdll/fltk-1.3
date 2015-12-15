@@ -75,7 +75,7 @@ void Fl_Graphics_Driver::text_extents(const char*t, int n, int& dx, int& dy, int
 
 /**  A constructor that sets the graphics driver used by the display */
 Fl_Display_Device::Fl_Display_Device(Fl_Graphics_Driver *graphics_driver) : Fl_Surface_Device(graphics_driver) {
-this->set_current();
+  this->set_current();
 };
 
 

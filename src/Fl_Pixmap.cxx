@@ -43,6 +43,16 @@
 
 #if defined(USE_X11) && defined(HAVE_X11_XREGION_H)
 #include <X11/Xregion.h>
+#else
+typedef struct {
+  short x1, x2, y1, y2;
+} BOX;
+struct _XRegion {
+  long size;
+  long numRects;
+  BOX *rects;
+  BOX extents;
+};
 #endif
 
 #include <stdio.h>

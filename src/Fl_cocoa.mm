@@ -158,7 +158,7 @@ void fl_set_status(int x, int y, int w, int h)
 /*
  * Mac keyboard lookup table
  */
-static unsigned short* macKeyLookUp = fl_compute_macKeyLookUp();
+static unsigned short* macKeyLookUp = NULL;
 
 /*
  * convert the current mouse chord into the FLTK modifier state
@@ -735,7 +735,7 @@ void Fl::remove_timeout(Fl_Timeout_Handler cb, void* data)
   if (!NSEqualRects(rp, [self frame])) {
     [self setFrame:rp display:YES];
   }
-  if (w->visible_r() && ![self parentWindow]) {
+  if (![self parentWindow]) {
     [pxid addChildWindow:self ordered:NSWindowAbove]; // needs OS X 10.2
     [self orderWindow:NSWindowAbove relativeTo:[pxid windowNumber]]; // necessary under 10.3
   }
@@ -2177,6 +2177,7 @@ static void cocoaKeyboardHandler(NSEvent *theEvent)
   // printf("%08x %08x %08x\n", keyCode, mods, key);
   maskedKeyCode = keyCode & 0x7f;
   mods_to_e_state( mods ); // process modifier keys
+  if (!macKeyLookUp) macKeyLookUp = fl_compute_macKeyLookUp();
   sym = macKeyLookUp[maskedKeyCode];
   if (sym < 0xff00) { // a "simple" key
     // find the result of this key without modifier
@@ -2417,6 +2418,7 @@ static FLTextInputContext* fltextinputcontext_instance = nil;
   if ( tMods )
   {
     unsigned short keycode = [theEvent keyCode];
+    if (!macKeyLookUp) macKeyLookUp = fl_compute_macKeyLookUp();
     Fl::e_keysym = Fl::e_original_keysym = macKeyLookUp[keycode & 0x7f];
     if ( Fl::e_keysym ) 
       sendEvent = ( prevMods<mods ) ? FL_KEYBOARD : FL_KEYUP;
@@ -3236,7 +3238,7 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
         parent = parent->window();
       }
       NSRect r = NSMakeRect(bx, main_screen_height - (by + H), W, H + (border()?bt:0));
-      [fl_xid(this) setFrame:r display:YES];
+      if (visible_r()) [fl_xid(this) setFrame:r display:YES];
     } else {
       bx = X; by = Y;
       parent = window();
@@ -3246,7 +3248,7 @@ void Fl_Window::resize(int X,int Y,int W,int H) {
         parent = parent->window();
       }
       NSPoint pt = NSMakePoint(bx, main_screen_height - (by + H));
-      [fl_xid(this) setFrameOrigin:pt]; // set cocoa coords to FLTK position
+      if (visible_r()) [fl_xid(this) setFrameOrigin:pt]; // set cocoa coords to FLTK position
     }
   }
   else {
