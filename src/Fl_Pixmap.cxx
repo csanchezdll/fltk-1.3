@@ -213,7 +213,6 @@ void Fl_Xlib_Graphics_Driver::draw(Fl_Pixmap *pxm, int XP, int YP, int WP, int H
     // make X use the bitmap as a mask:
     XSetClipMask(fl_display, fl_gc, pxm->mask_);
     XSetClipOrigin(fl_display, fl_gc, X-cx, Y-cy);
-#if defined (HAVE_X11_XREGION_H)
     if (clip_region()) {
       // At this point, XYWH is the bounding box of the intersection between
       // the current clip region and the (portion of the) pixmap we have to draw.
@@ -238,9 +237,6 @@ void Fl_Xlib_Graphics_Driver::draw(Fl_Pixmap *pxm, int XP, int YP, int WP, int H
     } else {
       copy_offscreen(X, Y, W, H, pxm->id_, cx, cy);
     }
-#else
-    copy_offscreen(X, Y, W, H, pxm->id_, cx, cy);
-#endif
     // put the old clip region back
     XSetClipOrigin(fl_display, fl_gc, 0, 0);
     restore_clip();
