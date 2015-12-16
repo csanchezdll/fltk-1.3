@@ -41,9 +41,8 @@
 #include <FL/Fl_Pixmap.H>
 #include <FL/Fl_Printer.H>
 
-#if defined(USE_X11) && defined(HAVE_X11_XREGION_H)
-#include <X11/Xregion.h>
-#else
+#if defined(USE_X11)
+#  ifndef HAVE_X11_XREGION_H
 typedef struct {
   short x1, x2, y1, y2;
 } BOX;
@@ -53,6 +52,9 @@ struct _XRegion {
   BOX *rects;
   BOX extents;
 };
+#  else
+#    include <X11/Xregion.h>
+#  endif
 #endif
 
 #include <stdio.h>
